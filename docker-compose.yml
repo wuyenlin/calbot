@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  calbot:
+    container_name: calbot-dev
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args: 
+        START_COMMAND: dev
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app

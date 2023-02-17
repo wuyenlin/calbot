@@ -1,0 +1,14 @@
+{
+  "extends": "@tsconfig/node18-strictest",
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"],
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "outDir": "./dist",
+    "incremental": true,
+    "strictNullChecks": true,
+    "noImplicitAny": false,
+  }
+}
