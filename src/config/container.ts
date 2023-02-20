@@ -2,13 +2,13 @@ import { container } from 'tsyringe';
 import Koa from 'koa';
 import { logger } from '../logger';
 import Router from 'koa-router';
-import { ContainerType } from '../types';
+import { ContainerType, State } from '../types';
 import type { Logger } from 'winston';
 import { Client, ClientConfig } from '@line/bot-sdk';
 import { environmentVariables } from './environment-variables';
 
 const koa = new Koa();
-const router = new Router();
+const router = new Router<State>();
 const lineClientConfig: ClientConfig = {
   channelAccessToken: environmentVariables.LINE_ACCESS_TOKEN,
   channelSecret: environmentVariables.LINE_CHANNEL_SECRET,
