@@ -13,11 +13,11 @@ export class LineHandler {
 
   public async handleTextEvent(webhookEvent: WebhookEvent): Promise<MessageAPIResponseBase | undefined> {
     if (webhookEvent.type !== 'message' || webhookEvent.message.type !== 'text') {
-      this.logger.error('Not TextMessageEvent.');
+      this.logger.warn('Not TextMessageEvent.');
       return;
     }
     if (webhookEvent.message.text !== 'report') {
-      this.logger.error('Message does not match the response keyword.');
+      this.logger.warn('Message does not match the response keyword.');
       return;
     }
     this.logger.info('Handling incoming text message.');
