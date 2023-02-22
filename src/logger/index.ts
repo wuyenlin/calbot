@@ -16,7 +16,7 @@ const loggerConfig: LoggerOptions = {
       return `[${timestamp}] ${service} ${level}: ${message}`;
     }),
   ),
-  defaultMeta: { service: 'triple-ls-service' },
+  defaultMeta: { service: 'calbot-service' },
   transports: [transportStream],
 };
 

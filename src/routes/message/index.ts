@@ -3,6 +3,7 @@ import { inject, singleton } from 'tsyringe';
 import { LineHandler } from '../../handler';
 import { ContainerType, State } from '../../types';
 import type { Logger } from 'winston';
+import type { WebhookEvent, WebhookRequestBody } from '@line/bot-sdk';
 
 @singleton()
 export default class MessageRouter {
@@ -20,16 +21,17 @@ export default class MessageRouter {
     });
 
     this.router.post('/api/v1/webhook', async (context, next) => {
-      context.body = 'message router webhook';
       this.logger.info('Message router webhook');
-      const events = context.state.events;
+      // TODO: use a validator instead
+      const rawBody: WebhookRequestBody = JSON.parse(context.request.rawBody) as WebhookRequestBody;
+      const events: WebhookEvent[] = rawBody.events;
 
       for (const event of events) {
         try {
           await this.lineHandler.handleTextEvent(event);
         } catch (e) {
-          //TODO: revisit
           context.status = 500;
+          this.logger.error('Something went wrong.');
         }
       }
       await next();
