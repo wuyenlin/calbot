@@ -8,6 +8,7 @@ export class LineHandler {
   constructor(@inject(ContainerType.LINE_CLIENT) private readonly lineClient: Client) {}
 
   public async handleTextEvent(webhookEvent: WebhookEvent): Promise<MessageAPIResponseBase | undefined> {
+    console.log({ webhookEvent });
     if (webhookEvent.type !== 'message' || webhookEvent.message.type !== 'text') {
       return;
     }
