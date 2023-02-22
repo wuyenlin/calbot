@@ -29,7 +29,6 @@ export default class MessageRouter {
       for (const event of events) {
         try {
           await this.lineHandler.handleTextEvent(event);
-          this.logger.info('Response handled.');
         } catch (e) {
           context.status = 500;
           this.logger.error('Something went wrong.');
