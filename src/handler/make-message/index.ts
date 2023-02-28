@@ -34,6 +34,11 @@ function makeBubbles(events: calendar_v3.Schema$Event[]): FlexBubble[] {
   return bubbles;
 }
 
+function makeLocaleString(dateTime: string): string {
+  const date = new Date(dateTime);
+  return date.toLocaleString();
+}
+
 function makeSingleFlexBubble(
   role: string,
   color: string,
@@ -67,7 +72,7 @@ function makeSingleFlexBubble(
       contents: [
         {
           type: 'text',
-          text: time ?? '',
+          text: time ? makeLocaleString(time) : '',
           size: 'sm',
           color: '#000066',
           wrap: true,

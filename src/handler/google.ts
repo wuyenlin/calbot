@@ -21,7 +21,8 @@ export class GoogleHandler {
       const response = await this.calendar.events.list({
         auth: this.googleJwt,
         calendarId: environmentVariables.GOOGLE_CALENDAR_ID,
-        timeMin: new Date().toISOString(),
+        timeMin: new Date(new Date().setHours(24, 0, 0, 0)).toISOString(),
+        timeMax: new Date(new Date().setHours(48, 0, 0, 0)).toISOString(),
         singleEvents: true,
         orderBy: 'startTime',
         timeZone: TIME_ZONE,

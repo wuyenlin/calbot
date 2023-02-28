@@ -31,7 +31,6 @@ export default class MessageRouter {
         try {
           const replyToken = this.lineHandler.handleTextEvent(event);
           if (!replyToken) {
-            this.logger.error('Error fetching reply token from webhook event.');
             return;
           }
           const calendarEvents = await this.googleHandler.listEvents();
