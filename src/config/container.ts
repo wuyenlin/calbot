@@ -21,8 +21,7 @@ const lineClientConfig: ClientConfig = {
 const lineClient = new Client(lineClientConfig);
 const googleCalendar = google.calendar({ version: 'v3' });
 
-const rawData = readFileSync('./credentials.json', 'utf-8');
-const credentials: Credentials = JSON.parse(rawData);
+const credentials: Credentials = JSON.parse(readFileSync('./credentials.json', 'utf-8'));
 const jwt: JWT = new google.auth.JWT(credentials.client_email, undefined, credentials.private_key, SCOPES);
 
 container.registerInstance<Koa>(Koa, koa);

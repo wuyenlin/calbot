@@ -8,10 +8,6 @@ export const environmentVariables = EnvironmentBuilder.create(
   'MAX_LOG_LEVEL',
   'LINE_ACCESS_TOKEN',
   'LINE_CHANNEL_SECRET',
-  'GOOGLE_API_KEY',
-  'GOOGLE_CLIENT_ID',
-  'GOOGLE_CLIENT_EMAIL',
-  'GOOGLE_CLIENT_SECRET',
   'GOOGLE_CALENDAR_ID',
 )
   .transform((apiPort) => {
