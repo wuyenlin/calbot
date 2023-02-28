@@ -1,7 +1,7 @@
 import type { Client, MessageAPIResponseBase, WebhookEvent } from '@line/bot-sdk';
 import { inject, singleton } from 'tsyringe';
 import { ContainerType } from '../types';
-import { response } from '../types/response';
+import { response } from '../types';
 import type { Logger } from 'winston';
 
 @singleton()

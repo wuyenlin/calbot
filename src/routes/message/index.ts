@@ -1,6 +1,6 @@
 import Router from 'koa-router';
 import { inject, singleton } from 'tsyringe';
-import { LineHandler } from '../../handler';
+import { GoogleHandler, LineHandler } from '../../handler';
 import { ContainerType, State } from '../../types';
 import type { Logger } from 'winston';
 import type { WebhookEvent, WebhookRequestBody } from '@line/bot-sdk';
@@ -11,6 +11,7 @@ export default class MessageRouter {
     private readonly router: Router<State>,
     private readonly lineHandler: LineHandler,
     @inject(ContainerType.LOGGER) private readonly logger: Logger,
+    private readonly googleHandler: GoogleHandler,
   ) {}
 
   public initialize() {
@@ -29,6 +30,7 @@ export default class MessageRouter {
       for (const event of events) {
         try {
           await this.lineHandler.handleTextEvent(event);
+          this.logger.info(this.googleHandler.listEvents());
         } catch (e) {
           context.status = 500;
           this.logger.error('Something went wrong.');

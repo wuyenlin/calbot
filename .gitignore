@@ -3,6 +3,7 @@
 /node_modules
 /coverage
 .env
+credentials.json
 
 # Logs
 logs
