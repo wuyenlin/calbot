@@ -3,6 +3,7 @@ import { ContainerType } from '../types';
 import type { Logger } from 'winston';
 import { calendar_v3 } from 'googleapis';
 import type { JWT } from 'google-auth-library';
+import { environmentVariables } from '../config/environment-variables';
 
 const TIME_ZONE = 'Asia/Taipei';
 
@@ -19,9 +20,8 @@ export class GoogleHandler {
       this.logger.info('Now listing calendar.');
       const response = await this.calendar.events.list({
         auth: this.googleJwt,
-        calendarId: 'bj780qtnerbb8dbso84k611krc@group.calendar.google.com',
+        calendarId: environmentVariables.GOOGLE_CALENDAR_ID,
         timeMin: new Date().toISOString(),
-        maxResults: 10,
         singleEvents: true,
         orderBy: 'startTime',
         timeZone: TIME_ZONE,

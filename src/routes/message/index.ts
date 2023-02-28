@@ -30,6 +30,7 @@ export default class MessageRouter {
       for (const event of events) {
         try {
           await this.lineHandler.handleTextEvent(event);
+          // TODO: make message in next MR
           console.log(await this.googleHandler.listEvents());
         } catch (e) {
           context.status = 500;
