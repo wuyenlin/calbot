@@ -30,7 +30,7 @@ export default class MessageRouter {
       for (const event of events) {
         try {
           await this.lineHandler.handleTextEvent(event);
-          this.logger.info(this.googleHandler.listEvents());
+          console.log(await this.googleHandler.listEvents());
         } catch (e) {
           context.status = 500;
           this.logger.error('Something went wrong.');

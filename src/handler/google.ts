@@ -19,7 +19,7 @@ export class GoogleHandler {
       this.logger.info('Now listing calendar.');
       const response = await this.calendar.events.list({
         auth: this.googleJwt,
-        calendarId: 'primary',
+        calendarId: 'bj780qtnerbb8dbso84k611krc@group.calendar.google.com',
         timeMin: new Date().toISOString(),
         maxResults: 10,
         singleEvents: true,
