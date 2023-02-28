@@ -15,7 +15,7 @@ export class GoogleHandler {
     @inject(ContainerType.GOOGLE_JWT) private readonly googleJwt: JWT,
   ) {}
 
-  public async listEvents(): Promise<calendar_v3.Schema$Events[] | undefined> {
+  public async listEvents(): Promise<calendar_v3.Schema$Event[] | undefined> {
     try {
       this.logger.info('Now listing calendar.');
       const response = await this.calendar.events.list({
