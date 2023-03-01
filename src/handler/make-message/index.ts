@@ -102,7 +102,7 @@ function makeSingleFlexBubble(
               type: 'text',
               text: eventName ?? '',
               color: '#8C8C8C',
-              size: 'sm',
+              size: 'md',
               wrap: true,
             },
           ],
@@ -111,6 +111,23 @@ function makeSingleFlexBubble(
       ],
       spacing: 'md',
       paddingAll: '12px',
+    },
+    footer: {
+      type: 'box',
+      layout: 'vertical',
+      contents: [
+        {
+          type: 'button',
+          action: {
+            type: 'message',
+            label: 'Ask',
+            text: `Regarding ${eventName} ...`,
+          },
+          margin: 'none',
+          style: 'primary',
+          color: '#33BBFF',
+        },
+      ],
     },
     styles: {
       footer: {

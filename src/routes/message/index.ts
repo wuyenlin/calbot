@@ -15,12 +15,6 @@ export default class MessageRouter {
   ) {}
 
   public initialize() {
-    this.router.get('/api/v1', async (context, next) => {
-      context.body = 'message router';
-      this.logger.info('Message router');
-      await next();
-    });
-
     this.router.post('/api/v1/webhook', async (context, next) => {
       this.logger.info('Message router webhook');
       // TODO: use a validator instead
