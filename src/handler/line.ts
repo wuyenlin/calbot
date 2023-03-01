@@ -1,8 +1,9 @@
 import type { Client, MessageAPIResponseBase, WebhookEvent } from '@line/bot-sdk';
 import { inject, singleton } from 'tsyringe';
 import { ContainerType } from '../types';
-import { response } from '../types';
 import type { Logger } from 'winston';
+import { makeMessageFromCalendarEvents } from './make-message';
+import type { calendar_v3 } from 'googleapis';
 
 @singleton()
 export class LineHandler {
@@ -11,7 +12,7 @@ export class LineHandler {
     @inject(ContainerType.LOGGER) private readonly logger: Logger,
   ) {}
 
-  public async handleTextEvent(webhookEvent: WebhookEvent): Promise<MessageAPIResponseBase | undefined> {
+  public getReplyTokenFromEvent(webhookEvent: WebhookEvent): string | undefined {
     if (webhookEvent.type !== 'message' || webhookEvent.message.type !== 'text') {
       this.logger.warn('Not TextMessageEvent.');
       return;
@@ -21,6 +22,13 @@ export class LineHandler {
       return;
     }
     this.logger.info('Handling incoming text message.');
-    return await this.lineClient.replyMessage(webhookEvent.replyToken, response);
+    return webhookEvent.replyToken;
+  }
+
+  public async sendCalendarEntries(
+    replyToken: string,
+    calendarEvents: calendar_v3.Schema$Event[],
+  ): Promise<MessageAPIResponseBase> {
+    return await this.lineClient.replyMessage(replyToken, makeMessageFromCalendarEvents(calendarEvents));
   }
 }

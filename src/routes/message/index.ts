@@ -29,9 +29,16 @@ export default class MessageRouter {
 
       for (const event of events) {
         try {
-          await this.lineHandler.handleTextEvent(event);
-          // TODO: make message in next MR
-          console.log(await this.googleHandler.listEvents());
+          const replyToken = this.lineHandler.getReplyTokenFromEvent(event);
+          if (!replyToken) {
+            return;
+          }
+          const calendarEvents = await this.googleHandler.listEvents();
+          if (!calendarEvents) {
+            this.logger.error('Error fetching Google Calendar events.');
+            return;
+          }
+          await this.lineHandler.sendCalendarEntries(replyToken, calendarEvents);
         } catch (e) {
           context.status = 500;
           this.logger.error('Something went wrong.');

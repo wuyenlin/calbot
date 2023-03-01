@@ -9,6 +9,9 @@ export const environmentVariables = EnvironmentBuilder.create(
   'LINE_ACCESS_TOKEN',
   'LINE_CHANNEL_SECRET',
   'GOOGLE_CALENDAR_ID',
+  'MEMBER1_EMAIL',
+  'MEMBER2_EMAIL',
+  'MEMBER3_EMAIL',
 )
   .transform((apiPort) => {
     if (!apiPort) {
