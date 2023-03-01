@@ -29,7 +29,7 @@ export default class MessageRouter {
 
       for (const event of events) {
         try {
-          const replyToken = this.lineHandler.handleTextEvent(event);
+          const replyToken = this.lineHandler.getReplyTokenFromEvent(event);
           if (!replyToken) {
             return;
           }
@@ -38,7 +38,7 @@ export default class MessageRouter {
             this.logger.error('Error fetching Google Calendar events.');
             return;
           }
-          await this.lineHandler.messageCalendarEntries(replyToken, calendarEvents);
+          await this.lineHandler.sendCalendarEntries(replyToken, calendarEvents);
         } catch (e) {
           context.status = 500;
           this.logger.error('Something went wrong.');

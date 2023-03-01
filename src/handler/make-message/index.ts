@@ -2,6 +2,14 @@ import type { calendar_v3 } from 'googleapis';
 import type { FlexBubble, FlexMessage } from '@line/bot-sdk';
 import { environmentVariables } from '../../config/environment-variables';
 
+const MEMBER1 = 'Dad';
+const MEMBER2 = 'Mom';
+const MEMBER3 = 'ylwu';
+
+const COLOR1 = '#27ACB2';
+const COLOR2 = '#FF6B6E';
+const COLOR3 = '#99ccff';
+
 export function makeMessageFromCalendarEvents(events: calendar_v3.Schema$Event[]): FlexMessage {
   return {
     type: 'flex',
@@ -17,16 +25,16 @@ function makeBubbles(events: calendar_v3.Schema$Event[]): FlexBubble[] {
   const bubbles: FlexBubble[] = [];
   events.forEach((event: calendar_v3.Schema$Event) => {
     switch (event.creator?.email) {
-      case environmentVariables.MEMBER_1_EMAIL: {
-        bubbles.push(makeSingleFlexBubble('Dad', '#27ACB2', event.summary, event.start?.dateTime));
+      case environmentVariables.MEMBER1_EMAIL: {
+        bubbles.push(makeSingleFlexBubble(MEMBER1, COLOR1, event.summary, event.start?.dateTime));
         break;
       }
-      case environmentVariables.MEMBER_2_EMAIL: {
-        bubbles.push(makeSingleFlexBubble('Mom', '#FF6B6E', event.summary, event.start?.dateTime));
+      case environmentVariables.MEMBER2_EMAIL: {
+        bubbles.push(makeSingleFlexBubble(MEMBER2, COLOR2, event.summary, event.start?.dateTime));
         break;
       }
-      case environmentVariables.MEMBER_3_EMAIL: {
-        bubbles.push(makeSingleFlexBubble('Yen-Lin', '#99ccff', event.summary, event.start?.dateTime));
+      case environmentVariables.MEMBER3_EMAIL: {
+        bubbles.push(makeSingleFlexBubble(MEMBER3, COLOR3, event.summary, event.start?.dateTime));
         break;
       }
     }

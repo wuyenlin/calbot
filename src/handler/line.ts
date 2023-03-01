@@ -12,7 +12,7 @@ export class LineHandler {
     @inject(ContainerType.LOGGER) private readonly logger: Logger,
   ) {}
 
-  public handleTextEvent(webhookEvent: WebhookEvent): string | undefined {
+  public getReplyTokenFromEvent(webhookEvent: WebhookEvent): string | undefined {
     if (webhookEvent.type !== 'message' || webhookEvent.message.type !== 'text') {
       this.logger.warn('Not TextMessageEvent.');
       return;
@@ -25,7 +25,7 @@ export class LineHandler {
     return webhookEvent.replyToken;
   }
 
-  public async messageCalendarEntries(
+  public async sendCalendarEntries(
     replyToken: string,
     calendarEvents: calendar_v3.Schema$Event[],
   ): Promise<MessageAPIResponseBase> {
