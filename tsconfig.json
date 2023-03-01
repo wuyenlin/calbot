@@ -1,6 +1,6 @@
 {
   "extends": "@tsconfig/node18-strictest",
-  "include": ["src/**/*.ts"],
+  "include": ["src"],
   "exclude": ["node_modules", "dist"],
   "compilerOptions": {
     "emitDecoratorMetadata": true,
